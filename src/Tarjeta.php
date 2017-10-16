@@ -2,9 +2,13 @@
 namespace TpFinal;
 class Tarjeta implements Tarjeta {
     protected $saldo;
+	protected $franquicia;
+	protected $viajes;
     
     function __construct () {
         $this->saldo = 0;
+		$this->franquicia = "comun";
+		$this->viajes = [];
     }
     public function saldo () {
         return $this->saldo;
@@ -24,4 +28,21 @@ class Tarjeta implements Tarjeta {
 			cargarSaldo ( $monto - 624 );
 		}
     }
+	
+	public function pagar ( Transporte $transporte, $fecha_y_hora ) {
+		switch ( $this->franquicia ) {
+			case "comun":
+				if ( $this->saldo >= 9,7 ) {
+					$this->saldo -= 9,7;
+				}
+				break;
+			case "estudiantil":
+				if ( $this->saldo >= 4,85 ) {
+					$this->saldo -= 4,85;
+				}
+				break;
+			case "total":
+				break;
+		}
+	}
 }
