@@ -1,10 +1,15 @@
 <?php
 namespace TpFinal;
 class Tarjeta implements Tarjeta {
-    protected $saldo;
-	  protected $franquicia;
-	  protected $viajes;
-    
+	protected $saldo;
+	protected $franquicia;
+	protected $viajes;
+	protected $viajeplus;
+	
+	function __construct ( ){
+	$this->viajeplus = 0;
+	}
+	
     public function saldo () {
         return $this->saldo;
     }
