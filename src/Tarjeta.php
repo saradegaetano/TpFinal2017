@@ -5,9 +5,11 @@ class Tarjeta implements Tarjeta {
 	protected $franquicia;
 	protected $viajes;
 	protected $viajeplus;
+	protected $fh;
 	
 	function __construct ( ){
-	$this->viajeplus = 0;
+		$this->viajeplus = 0;
+		$this->viajes = [];
 	}
 	
     public function saldo () {
@@ -29,20 +31,10 @@ class Tarjeta implements Tarjeta {
 		}
     }
 	
-	public function pagar ( Transporte $transporte, $fecha_y_hora ) {
-		switch ( $this->franquicia ) {
-			case "comun":
-				if ( $this->saldo >= 9,7 ) {
-					$this->saldo -= 9,7;
-				}
-				break;
-			case "estudiantil":
-				if ( $this->saldo >= 4,85 ) {
-					$this->saldo -= 4,85;
-				}
-				break;
-			case "total":
-				break;
-		}
+	public function pagar ( Transporte $transporte ) {
+		$fh=new DateTime();
+		$nViaje = $fh->format('Y-m-d-H-i-s');
+		$$nViaje = new Viaje ( $this , $transporte );	// El nombre del objeto tarjeta es la fecha y la hora del viaje
+		array_push ( $viajes , $$nViaje );
 	}
 }
