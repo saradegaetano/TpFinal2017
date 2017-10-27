@@ -6,6 +6,7 @@ class Tarjeta implements Tarjeta {
 	protected $viajes;
 	protected $viajeplus;
 	protected $fh;
+	protected $precioC = 9,70;
 	
 	function __construct ( ){
 		$this->viajeplus = 0;
@@ -19,6 +20,8 @@ class Tarjeta implements Tarjeta {
     public function cargarSaldo ( $monto ) {
 		if ( $monto < 332 ) {
 			$this->saldo += $monto;
+			$this->saldo -= ($this->viajeplus * $this->precioC);
+			$this->viajeplus = 0;
 			return;
 		}
 		elseif ( $monto < 624 ) {
