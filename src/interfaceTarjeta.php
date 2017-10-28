@@ -2,7 +2,7 @@
 
 namespace TpFinal;
 
-interface Tarjeta {
+interface interfaceTarjeta {
  public function pagar(Transporte $transporte, $fecha_y_hora);
  public function cargarSaldo($monto);
  public function saldo();
