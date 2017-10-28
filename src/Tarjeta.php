@@ -29,11 +29,11 @@ class Tarjeta implements interfaceTarjeta {
 		}
 		elseif ( $monto < 624 ) {
 			$this->saldo += 388;
-			cargarSaldo ( $monto - 332 );
+			$this->cargarSaldo ( $monto - 332 );
 		}
 		elseif ( $monto >= 624 ) {
 			$this->saldo += 776;
-			cargarSaldo ( $monto - 624 );
+			$this->cargarSaldo ( $monto - 624 );
 		}
     }
 	
