@@ -8,6 +8,7 @@ class Tarjeta implements Tarjeta {
 	protected $fh;
 	
 	function __construct ( ){
+		$this->saldo = 0;
 		$this->viajeplus = 0;
 		$this->viajes = [];
 	}
