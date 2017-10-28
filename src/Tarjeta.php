@@ -1,5 +1,5 @@
 <?php
-namespace TpFinal;
+namespace TpFinal2017;
 class Tarjeta implements Tarjeta {
 	protected $saldo;
 	protected $franquicia;
