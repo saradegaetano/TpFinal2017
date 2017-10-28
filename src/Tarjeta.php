@@ -1,6 +1,6 @@
 <?php
 namespace TpFinal;
-class Tarjeta implements Tarjeta {
+class Tarjeta implements interfaceTarjeta {
 	protected $saldo;
 	protected $franquicia;
 	protected $viajes;
