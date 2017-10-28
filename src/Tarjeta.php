@@ -6,7 +6,7 @@ class Tarjeta implements Tarjeta {
 	protected $viajes;
 	protected $viajeplus;
 	protected $fh;
-	protected $precioC = 9,70;
+	protected $precioC = 9.70;
 	
 	function __construct ( ){
 		$this->saldo = 0;
