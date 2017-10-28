@@ -7,11 +7,13 @@ class Tarjeta implements Tarjeta {
 	protected $viajeplus;
 	protected $fh;
 	protected $precioC = 9.70;
+	protected $nextID = 0;
 	
 	function __construct ( ){
 		$this->saldo = 0;
 		$this->viajeplus = 0;
 		$this->viajes = [];
+		$this->nextID += 1;
 	}
 	
     public function saldo () {
