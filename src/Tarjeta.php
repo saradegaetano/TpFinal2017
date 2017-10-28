@@ -43,4 +43,7 @@ class Tarjeta implements interfaceTarjeta {
 		$$nViaje = new Viaje ( $this , $transporte );	// El nombre del objeto tarjeta es la fecha y la hora del viaje
 		array_push ( $this->viajes , $$nViaje );
 	}
+	public function viajesRealizados() {
+		print_r( $this->viajes );
+	}
 }
