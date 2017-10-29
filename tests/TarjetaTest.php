@@ -36,8 +36,16 @@ class TarjetaTest extends TestCase {
 		$tarjeta->cargarSaldo( 50 );
 	    $tarjeta1->pagar($colectivo144negra);
 		$colectivo103negra = new Colectivo ( "103 negra" );
-		$tarjeta1->pagar($colectivo103negra);
-	    $this->assertEquals( $tarjeta1->saldo(); 50-9.70-3.20 );
+		$tarjeta->pagar($colectivo103negra);
+	    $this->assertEquals( $tarjeta->saldo(); 50-9.70-3.20 );
+    }
+	public function testDosViajesTransbordo() {
+		$tarjeta3 = new Tarjeta ("comun")
+		$tarjeta3->cargarSaldo( 50 );
+	   	 $tarjeta3->pagar($colectivo144negra);
+		$tarjeta3->pagar($colectivo103negra);
+		$tarjeta3->pagar($colectivo103negra);
+	    	$this->assertEquals( $tarjeta3->saldo(); 50-9.70-3.20-9.70 );
     }
 	
 }
