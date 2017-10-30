@@ -7,10 +7,12 @@ class Viaje {
 	protected $tipo;
 	protected $monto;
 	protected $transporte;
+	protected $tarjeta;
 	protected $precioC = 9,70;
 	protected $precioB = 12,45;
 	
 	function __construct ( Tarjeta $tarjeta, Transporte $transporte ) {
+		$this->tarjeta = $tarjeta;
 		$this->fecha = date( "Y/m/d" );
 		$this->hora = date( "h:i:sa" );
 		$this->transporte = $transporte;
