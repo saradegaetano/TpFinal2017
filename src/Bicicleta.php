@@ -3,7 +3,11 @@
 namespace TpFinal;
 
 class Bici {
-	protected $estado;
+	protected $id;
+	
+	function __construct ( $id ) {
+		$this->id = $id;
+	}
 }
 
 ?>
