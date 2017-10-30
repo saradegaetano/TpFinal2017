@@ -8,6 +8,7 @@ class Tarjeta implements interfaceTarjeta {
 	protected $fh;
 	protected $precioC = 9.70;
 	protected $nextID = 0;
+	protected $boleto;
 	
 	function __construct ( $franquicia ){
 		$this->saldo = 0;
@@ -43,6 +44,7 @@ class Tarjeta implements interfaceTarjeta {
 		$nViaje = $fh->format('Y-m-d-H-i-s');
 		$$nViaje = new Viaje ( $this , $transporte );	// El nombre del objeto tarjeta es la fecha y la hora del viaje
 		array_push ( $this->viajes , $$nViaje );
+		$this->boleto = new Boleto ( $$nViaje );
 	}
 	public function viajesRealizados() {
 		print_r( $this->viajes );
