@@ -15,8 +15,10 @@ class Viaje {
 	protected $dospm = date ( "02:00:00pm" );
 	protected $diezpm = date ( "10:00:00pm" );
 	protected $cantTrasb = 0;
+	protected $tarjeta;
 	
 	function __construct ( Tarjeta $tarjeta, Transporte $transporte ) {
+		$this->tarjeta = $tarjeta;
 		$this->fecha = date( "Y/m/d" );
 		$this->diaSemana = date( "D" );
 		$this->hora = date( "h:i:sa" , $horaActual );

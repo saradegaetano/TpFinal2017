@@ -2,8 +2,12 @@
 
 namespace TpFinal;
 
-class Bici {
-	protected $estado;
+class Bici extends Transporte {
+	protected $id;
+	
+	function __construct ( $id ) {
+		$this->id = $id;
+	}
 }
 
 ?>
