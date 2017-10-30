@@ -25,7 +25,7 @@ class Viaje {
 		
 		$anterior = prev( $tarjeta->viajes ); 
 		
-		if ( is_a ( $this->transporte , Colectivo ) ) {
+		if ( is_a ( $this->transporte , Colectivo ) && $anterior->transporte->linea( ) != $this->transporte->linea( ) ) {
 			if ( ( $this->hora > $seisam && $this->hora < $diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $seisam && $this->hora < $dospm && $this->diaSemana == "Sat" ) ) {
 				if ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 60 ) {
 					if ( $this->tipo == "comun" ) {
