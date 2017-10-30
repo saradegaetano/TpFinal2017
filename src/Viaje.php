@@ -7,7 +7,6 @@ class Viaje {
 	protected $tipo;
 	protected $monto;
 	protected $transporte;
-	protected $ID;
 	protected $precioC = 9.70;
 	protected $precioB = 12.45;
 	protected $horaActual = time ( ); // no se si funcionara esto pero spongo que si
@@ -24,7 +23,7 @@ class Viaje {
 		$this->hora = date( "h:i:sa" , $horaActual );
 		$this->transporte = $transporte;
 		$this->tipo = $tarjeta->franquicia;
-		$this->ID = $tarjeta->nextID;
+		$this->tarjeta = $tarjeta;
 		
 		$anterior = prev( $tarjeta->viajes ); 
 		
