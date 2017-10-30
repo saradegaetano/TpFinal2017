@@ -1,7 +1,7 @@
 <?php
 namespace TpFinal;
 
-class Colectivo {
+class Colectivo extends Transporte {
 	protected $linea;
 	
 	function __construct ($linea) {
