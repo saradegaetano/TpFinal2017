@@ -2,7 +2,7 @@
 
 namespace TpFinal;
 
-class Bici {
+class Bici extends Transporte {
 	protected $id;
 	
 	function __construct ( $id ) {
