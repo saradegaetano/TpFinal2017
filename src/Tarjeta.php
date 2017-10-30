@@ -47,6 +47,6 @@ class Tarjeta implements interfaceTarjeta {
 		$this->boleto = new Boleto ( $$nViaje );
 	}
 	public function viajesRealizados() {
-		print_r( $this->viajes );
+		return $this->viajes;
 	}
 }
