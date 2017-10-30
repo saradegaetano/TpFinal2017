@@ -25,7 +25,7 @@ class Viaje {
 		$this->tipo = $tarjeta->franquicia;
 		$this->tarjeta = $tarjeta;
 		
-		$anterior = prev( $tarjeta->viajes ); 
+		$anterior = end( $tarjeta->viajesRealizados() ); 
 		
 		if ( is_a ( $this->transporte , Colectivo ) ) {
 			if ( ( $this->hora > $seisam && $this->hora < $diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $seisam && $this->hora < $dospm && $this->diaSemana == "Sat" ) ) {
