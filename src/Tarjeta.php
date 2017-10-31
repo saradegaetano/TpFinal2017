@@ -21,6 +21,10 @@ class Tarjeta implements interfaceTarjeta {
     public function saldo () {
         return $this->saldo;
     }
+
+	public function franquicia () {
+		return $this->franquicia;
+	}
     
     public function cargarSaldo ( $monto ) {
 		if ( $monto < 332 ) {
