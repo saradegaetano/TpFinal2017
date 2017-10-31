@@ -24,7 +24,7 @@ class Viaje {
 		$this->tarjeta = $tarjeta;
 		$this->fecha = date( "Y/m/d" );
 		$this->diaSemana = date( "D" );
-		$this->hora = date( "h:i:sa" , $horaActual );
+		$this->hora = date( "h:i:sa" , $this->horaActual );
 		$this->transporte = $transporte;
 		$this->tipo = $tarjeta->franquicia;
 		$this->tarjeta = $tarjeta;
