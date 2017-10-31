@@ -40,7 +40,7 @@ class TarjetaTest extends TestCase {
 	    $this->assertEquals( $tarjeta->saldo(), 50-9.70-3.20 );
     }
 	public function testDosViajesTransbordo() {
-		$tarjeta3 = new Tarjeta ("comun")
+		$tarjeta3 = new Tarjeta ("comun");
 		$tarjeta3->cargarSaldo( 50 );
 	   	 $tarjeta3->pagar($colectivo144);
 		$tarjeta3->pagar($colectivo103);
