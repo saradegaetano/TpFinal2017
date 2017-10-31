@@ -23,6 +23,11 @@ class TarjetaTest extends TestCase {
         $tarjeta->cargarSaldo( 332 );
         $this->assertEquals( $tarjeta->saldo(), 388 );
     }
+	public function testSaldoSeiscientos() {
+        $tarjeta = new Tarjeta ( 1234, "comun");
+        $tarjeta->cargarSaldo( 624 );
+        $this->assertEquals( $tarjeta->saldo(), 776 );
+    }
     public function testUnViaje() {
 	    $tarjeta = new Tarjeta ( 1234, "comun");
 	    $tarjeta->cargarSaldo( 50 );
