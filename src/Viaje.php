@@ -80,7 +80,7 @@ class Viaje {
 			else {
 				switch ( $this->tipo ) {
 				case "comun":
-					if ( $tarjeta->saldo >= $this->precioB {
+					if ( $tarjeta->saldo >= $this->precioB ) {
 						$this->monto = $this->precioB;
 					}
 					elseif ($tarjeta->viajeplus <= 1) {
