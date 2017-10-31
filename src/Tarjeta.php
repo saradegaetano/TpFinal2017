@@ -7,14 +7,14 @@ class Tarjeta implements interfaceTarjeta {
 	protected $viajeplus;
 	protected $fh;
 	protected $precioC = 9.70;
-	protected $nextID = 0;
+	protected $id;
 	protected $boleto;
 	
-	function __construct ( $franquicia ){
+	function __construct ( $id, $franquicia ){
 		$this->saldo = 0;
 		$this->viajeplus = 0;
 		$this->viajes = [];
-		$this->nextID += 1;
+		$this->id = $id;
 		$this->franquicia = $franquicia;
 	}
 	
