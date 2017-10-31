@@ -46,6 +46,7 @@ class Tarjeta implements interfaceTarjeta {
 	public function pagar ( Transporte $transporte ) {
 		$nViaje = date('Y-m-d-H-i-s');
 		$$nViaje = new Viaje ( $this , $transporte );	// El nombre del objeto tarjeta es la fecha y la hora del viaje
+		$this->saldo -= $$nViaje->monto();
 		array_push ( $this->viajes , $$nViaje );
 		$this->boleto = new Boleto ( $$nViaje );
 	}
