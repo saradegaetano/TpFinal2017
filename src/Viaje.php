@@ -15,6 +15,7 @@ class Viaje {
 	protected $diezpm;
 	protected $cantTrasb = 0;
 	protected $tarjeta;
+	protected $anterior;
 	
 	function __construct ( Tarjeta $tarjeta, Transporte $transporte ) {
 		$this->seisam = date ( "06:00:00am" );
@@ -29,7 +30,7 @@ class Viaje {
 		$this->tipo = $tarjeta->franquicia();
 		$this->tarjeta = $tarjeta;
 		
-		$anterior = end( $tarjeta->viajesRealizados() ); 
+		$this->anterior = end( $tarjeta->viajesRealizados() ); 
 		
 		if ( is_a ( $this->transporte , Colectivo ) && $anterior->transporte->linea( ) != $this->transporte->linea( ) ) {
 			if ( ( $this->hora > $seisam && $this->hora < $diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $seisam && $this->hora < $dospm && $this->diaSemana == "Sat" ) ) {
