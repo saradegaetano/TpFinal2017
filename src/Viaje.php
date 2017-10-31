@@ -9,14 +9,18 @@ class Viaje {
 	protected $transporte;
 	protected $precioC = 9.70;
 	protected $precioB = 12.45;
-	protected $horaActual = time ( ); // no se si funcionara esto pero spongo que si
-	protected $seisam = date ( "06:00:00am" );
-	protected $dospm = date ( "02:00:00pm" );
-	protected $diezpm = date ( "10:00:00pm" );
+	protected $horaActual; // no se si funcionara esto pero spongo que si
+	protected $seisam;
+	protected $dospm;
+	protected $diezpm;
 	protected $cantTrasb = 0;
 	protected $tarjeta;
 	
 	function __construct ( Tarjeta $tarjeta, Transporte $transporte ) {
+		$this->seisam = date ( "06:00:00am" );
+		$this->dospm = date ( "02:00:00pm" );
+		$this->diezpm = date ( "10:00:00pm" );
+		$this->horaActual = time();
 		$this->tarjeta = $tarjeta;
 		$this->fecha = date( "Y/m/d" );
 		$this->diaSemana = date( "D" );
