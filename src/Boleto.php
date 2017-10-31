@@ -14,8 +14,8 @@ class Boleto extends Viaje {
 		$this->linea = $viaje->transporte->linea();
 		$this->idTarjeta = $viaje->tarjeta->id();
 		
-		echo $this->fecha "<br>";
-		echo $this->hora "<br>";
+		echo $this->fecha .  "<br>";
+		echo $this->hora .  "<br>";
 		echo "tarjeta: " . $this->idTarjeta .  "<br>";
 		echo "linea: " . $this->linea  . "<br>";
 		echo "franquicia: " . $this->tipo .  "<br>";
