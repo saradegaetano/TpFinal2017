@@ -15,7 +15,7 @@ class Viaje {
 	protected $diezpm;
 	protected $cantTrasb = 0;
 	protected $tarjeta;
-	
+
 	function __construct ( Tarjeta $tarjeta, Transporte $transporte ) {
 		$this->seisam = date ( "06:00:00am" );
 		$this->dospm = date ( "02:00:00pm" );
@@ -28,32 +28,34 @@ class Viaje {
 		$this->transporte = $transporte;
 		$this->tipo = $tarjeta->franquicia();
 		$this->tarjeta = $tarjeta;
-		
+
 		$viajes = $tarjeta->viajesRealizados();
 		$anterior = end( $viajes );
-		
-		if ( is_a ( $this->transporte , 'Colectivo' ) && $anterior->transporte->linea( ) != $this->transporte->linea( ) ) {
-			if ( ( $this->hora > $seisam && $this->hora < $diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $seisam && $this->hora < $dospm && $this->diaSemana == "Sat" ) ) {
-				if ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 60  && $this->cantTrasb != 1 ) {
-					if ( $this->tipo == "comun" ) {
-						if ( $tarjeta->saldo() >= round( ( $this->precioC / 3 ) , 2 ) ) {
-							$this->monto = round( ( $this->precioC / 3 ) , 2 );
-						}
-						else {
-							echo "No tiene saldo suficiente<br>";
-						}
-					}
-					elseif ( $this->tipo == "estudiantil" ) {
-						if ( $tarjeta->saldo() >= round( ( $this->precioC / 6 ) , 2 ) ) {
-							$this->monto = round( ( $this->precioC / 6 ) , 2 );
-						}
-						else {
-							echo "No tiene saldo suficiente<br>";
-						}
-					}
-				}
-			}
-			elseif ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 90 && $this->cantTrasb != 1 )
+
+		if ( is_a ( $this->transporte , 'Colectivo' ) ) {
+            if ( $anterior->transporte->linea( ) != $this->transporte->linea( )) {
+                if ( ( $this->hora > $seisam && $this->hora < $diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $seisam && $this->hora < $dospm && $this->diaSemana == "Sat" ) ) {
+                    if ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 60  && $this->cantTrasb != 1 ) {
+                        if ( $this->tipo == "comun" ) {
+                            if ( $tarjeta->saldo() >= round( ( $this->precioC / 3 ) , 2 ) ) {
+                                $this->monto = round( ( $this->precioC / 3 ) , 2 );
+                            }
+                            else {
+                                echo "No tiene saldo suficiente<br>";
+                            }
+                        }
+                        elseif ( $this->tipo == "estudiantil" ) {
+                            if ( $tarjeta->saldo() >= round( ( $this->precioC / 6 ) , 2 ) ) {
+                                $this->monto = round( ( $this->precioC / 6 ) , 2 );
+                            }
+                            else {
+                                echo "No tiene saldo suficiente<br>";
+                            }
+                        }
+                    }
+                }
+            }
+			elseif ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 90 && $this->cantTrasb != 1 ) {
 				if ( $this->tipo == "comun" ) {
 					if ( $tarjeta->saldo() >= round( ( $this->precioC / 3 ) , 2 ) ) {
 						$this->monto = round( ( $this->precioC / 3 ) , 2 );
@@ -74,8 +76,34 @@ class Viaje {
 					}
 				}
 			}
-			
-		
+		else {
+            switch ( $this->tipo ) {
+                case "comun":
+					if ( $tarjeta->saldo() >= $this->precioC ) {
+						$this->monto = $this->precioC;
+					}
+					else {
+						echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
+						// aca habria que meter algo de que no se puede hacer el viaje
+					}
+					break;
+
+				case "estudiantil":
+					if ( $tarjeta->saldo() >= round( ( $this->precioC / 2 ) , 2 ) )  {
+						$this->monto = round( ( $this->precioC / 2 ) , 2 ) ;
+					}
+					else {
+						echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
+						// aca habria que meter algo de que no se puede hacer el viaje
+					}
+					break;
+				case "total":
+						$this->monto = 0;
+					break;
+            }
+		}
+		}
+
 		if ( is_a ( $this->transporte , 'Bici' ) ) {
 			$diaSiguiente = strtotime ( '+1 day' , strtotime ( $anterior->fecha ) );
 			$diaSiguiente = date ( 'Y/m/j' , $diaSiguiente );
@@ -89,7 +117,7 @@ class Viaje {
 						$this->monto = $this->precioB;
 					}
 					elseif ($tarjeta->viajeplus <= 1) {
-						$tarjeta->viajeplus += 1;		
+						$tarjeta->viajeplus += 1;
 					}
 					else {
 						echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
@@ -102,7 +130,7 @@ class Viaje {
 						$this->monto = round( ( $this->precioB / 2 ) , 2 ) ;
 					}
 					elseif ($tarjeta->viajeplus <= 1) {
-						$tarjeta->viajeplus += 1;		
+						$tarjeta->viajeplus += 1;
 					}
 					else {
 						echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
@@ -116,7 +144,7 @@ class Viaje {
 			}
 		}
 	}
-	
+
 	public function monto() {
 		return $this->monto;
 	}
