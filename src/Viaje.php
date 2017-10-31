@@ -69,7 +69,6 @@ class Viaje {
 					}
 				}
 			}
-		}
 			
 		
 		if ( is_a ( $this->transporte , Bici ) ) {
