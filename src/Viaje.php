@@ -36,7 +36,7 @@ class Viaje {
 			if ( ( $this->hora > $seisam && $this->hora < $diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $seisam && $this->hora < $dospm && $this->diaSemana == "Sat" ) ) {
 				if ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 60  && $this->cantTrasb != 1 ) {
 					if ( $this->tipo == "comun" ) {
-						if ( $tarjeta->saldo >= round( ( $this->precioC / 3 ) , 2 ) ) {
+						if ( $tarjeta->saldo() >= round( ( $this->precioC / 3 ) , 2 ) ) {
 							$this->monto = round( ( $this->precioC / 3 ) , 2 );
 						}
 						else {
@@ -44,7 +44,7 @@ class Viaje {
 						}
 					}
 					elseif ( $this->tipo == "estudiantil" ) {
-						if ( $tarjeta->saldo >= round( ( $this->precioC / 6 ) , 2 ) ) {
+						if ( $tarjeta->saldo() >= round( ( $this->precioC / 6 ) , 2 ) ) {
 							$this->monto = round( ( $this->precioC / 6 ) , 2 );
 						}
 						else {
@@ -55,7 +55,7 @@ class Viaje {
 			}
 			elseif ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 90 && $this->cantTrasb != 1 )
 				if ( $this->tipo == "comun" ) {
-					if ( $tarjeta->saldo >= round( ( $this->precioC / 3 ) , 2 ) ) {
+					if ( $tarjeta->saldo() >= round( ( $this->precioC / 3 ) , 2 ) ) {
 						$this->monto = round( ( $this->precioC / 3 ) , 2 );
 						$this->cantTrasb += 1;
 					}
@@ -65,7 +65,7 @@ class Viaje {
 					}
 				}
 				elseif ( $this->tipo == "estudiantil" ) {
-					if ( $tarjeta->saldo >= round( ( $this->precioC / 6 ) , 2 ) ) {
+					if ( $tarjeta->saldo() >= round( ( $this->precioC / 6 ) , 2 ) ) {
 						$this->monto = round( ( $this->precioC / 6 ) , 2 );
 					}
 					else {
@@ -85,7 +85,7 @@ class Viaje {
 			else {
 				switch ( $this->tipo ) {
 				case "comun":
-					if ( $tarjeta->saldo >= $this->precioB ) {
+					if ( $tarjeta->saldo() >= $this->precioB ) {
 						$this->monto = $this->precioB;
 					}
 					elseif ($tarjeta->viajeplus <= 1) {
@@ -98,7 +98,7 @@ class Viaje {
 					break;
 
 				case "estudiantil":
-					if ( $tarjeta->saldo >= round( ( $this->precioB / 2 ) , 2 ) )  {
+					if ( $tarjeta->saldo() >= round( ( $this->precioB / 2 ) , 2 ) )  {
 						$this->monto = round( ( $this->precioB / 2 ) , 2 ) ;
 					}
 					elseif ($tarjeta->viajeplus <= 1) {
@@ -115,7 +115,9 @@ class Viaje {
 				}
 			}
 		}
-		
-		$tarjeta->saldo -= $this->monto;
+	}
+	
+	public function monto() {
+		return $this->monto;
 	}
 }
