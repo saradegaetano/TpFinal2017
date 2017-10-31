@@ -14,38 +14,47 @@ class TarjetaTest extends TestCase {
         $this->assertEquals( $tarjeta->saldo(), 0 );
     }
     public function testSaldoCincuenta() {
-        $tarjeta1 = new Tarjeta("comun");
-        $tarjeta1->cargarSaldo( 50 );
-        $this->assertEquals( $tarjeta1->saldo(), 50 );
+        $tarjeta = new Tarjeta("comun");
+        $tarjeta->cargarSaldo( 50 );
+        $this->assertEquals( $tarjeta->saldo(), 50 );
     }
     public function testSaldoTrescientos() {
-        $tarjeta2 = new Tarjeta ("comun");
-        $tarjeta2->cargarSaldo( 332 );
-        $this->assertEquals( $tarjeta2->saldo(), 388 );
+        $tarjeta = new Tarjeta ("comun");
+        $tarjeta->cargarSaldo( 332 );
+        $this->assertEquals( $tarjeta->saldo(), 388 );
     }
     public function testUnViaje() {
+	    $tarjeta = new Tarjeta ("comun");
+	    $tarjeta->cargarSaldo( 50 );
 	    $colectivo144 = new Colectivo ( 144 );
-	    $tarjeta2->pagar($colectivo144);
-	    $this->assertEquals( $tarjeta2->saldo(), (388-9.70) );
+	    $tarjeta->pagar($colectivo144);
+	    $this->assertEquals( $tarjeta->saldo(), (50-9.70) );
     }
 	 public function testDosViajes() {
-	    $tarjeta1->pagar($colectivo144negra);
-	    $this->assertEquals( $tarjeta1->saldo(), 50-9.70-9.70 );
+		$tarjeta = new Tarjeta ("comun");
+		$tarjeta->cargarSaldo( 50 );
+		$colectivo144 = new Colectivo ( 144 );
+	    $tarjeta->pagar($colectivo144);
+	    $this->assertEquals( $tarjeta->saldo(), 50-9.70-9.70 );
     }
 	public function testViajeTransbordo() {
+		$tarjeta = new Tarjeta ("comun");
+		$colectivo144 = new Colectivo ( 144 );
 		$tarjeta->cargarSaldo( 50 );
-	    $tarjeta1->pagar($colectivo144);
+	    $tarjeta->pagar($colectivo144);
 		$colectivo103 = new Colectivo ( 103 );
 		$tarjeta->pagar($colectivo103);
 	    $this->assertEquals( $tarjeta->saldo(), 50-9.70-3.20 );
     }
 	public function testDosViajesTransbordo() {
-		$tarjeta3 = new Tarjeta ("comun");
-		$tarjeta3->cargarSaldo( 50 );
-	   	 $tarjeta3->pagar($colectivo144);
-		$tarjeta3->pagar($colectivo103);
+		$tarjeta = new Tarjeta ("comun");
+		$colectivo103 = new Colectivo ( 103 );
+		$colectivo144 = new Colectivo ( 144 );
+		$tarjeta->cargarSaldo( 50 );
+		$tarjeta->pagar($colectivo144);
+		$tarjeta->pagar($colectivo103);
 		$tarjeta3->pagar($colectivo103negra);
-	    	$this->assertEquals( $tarjeta3->saldo(), 50-9.70-3.20-9.70 );
+		$this->assertEquals( $tarjeta3->saldo(), 50-9.70-3.20-9.70 );
     }
 	
 }
