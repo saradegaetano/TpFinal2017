@@ -21,6 +21,9 @@ class Tarjeta implements interfaceTarjeta {
     public function saldo () {
         return $this->saldo;
     }
+	public function id() {
+		return $this->id;
+	}
 
 	public function franquicia () {
 		return $this->franquicia;
