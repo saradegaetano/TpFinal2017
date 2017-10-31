@@ -2,6 +2,6 @@
 
 namespace TpFinal;
 
-class Transporte {
+abstract class Transporte {
 
 }
