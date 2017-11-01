@@ -33,7 +33,7 @@ class Viaje {
 		$anterior = end( $viajes );
 
 		if ( is_a ( $this->transporte , 'TpFinal\Colectivo' ) ) {
-            if ( $anterior->transporte->linea( ) != $this->transporte->linea( )) {
+            if ( $anterior->transporte->linea( ) != $this->transporte->linea( ) || $viajes == NULL) {
                 if ( ( $this->hora > $seisam && $this->hora < $diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $seisam && $this->hora < $dospm && $this->diaSemana == "Sat" ) ) {
                     if ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 60  && $this->cantTrasb != 1 ) {
                         if ( $this->tipo == "comun" ) {
@@ -105,12 +105,46 @@ class Viaje {
 		}
 
 		if ( is_a ( $this->transporte , 'TpFinal\Bici' ) ) {
-			$diaSiguiente = strtotime ( '+1 day' , strtotime ( $anterior->fecha ) );
-			$diaSiguiente = date ( 'Y/m/j' , $diaSiguiente );
-			if($this->fecha <= $diaSiguiente && $this->horaActual <= $anterior->horaActual) {
-				$this->monto = 0;
+			if($viajes != NULL) {
+				$diaSiguiente = strtotime ( '+1 day' , strtotime ( $anterior->fecha ) );
+				$diaSiguiente = date ( 'Y/m/j' , $diaSiguiente );
+				if($this->fecha <= $diaSiguiente && $this->horaActual <= $anterior->horaActual) {
+					$this->monto = 0;
+				}
+				else {
+					switch ( $this->tipo ) {
+						case "comun":
+							if ( $tarjeta->saldo() >= $this->precioB ) {
+								$this->monto = $this->precioB;
+							}
+							elseif ($tarjeta->viajeplus <= 1) {
+								$tarjeta->viajeplus += 1;
+							}
+							else {
+								echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
+								// aca habria que meter algo de que no se puede hacer el viaje
+							}
+							break;
+
+						case "estudiantil":
+							if ( $tarjeta->saldo() >= round( ( $this->precioB / 2 ) , 2 ) )  {
+								$this->monto = round( ( $this->precioB / 2 ) , 2 ) ;
+							}
+							elseif ($tarjeta->viajeplus <= 1) {
+								$tarjeta->viajeplus += 1;
+							}
+							else {
+								echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
+								// aca habria que meter algo de que no se puede hacer el viaje
+							}
+							break;
+						case "total":
+								$this->monto = 0;
+							break;
+					}
+				}
 			}
-			else {
+			else{
 				switch ( $this->tipo ) {
 				case "comun":
 					if ( $tarjeta->saldo() >= $this->precioB ) {
