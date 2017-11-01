@@ -35,7 +35,33 @@ class Viaje {
 		}
 
 		if ( is_a ( $this->transporte , 'TpFinal\Colectivo' ) ) {
-            if ( $viajes == NULL || $anterior->transporte->linea( ) != $this->transporte->linea( ) ) {
+            if ( $viajes == NULL ) {
+                switch ( $this->tipo ) {
+                case "comun":
+					if ( $tarjeta->saldo() >= $this->precioC ) {
+						$this->monto = $this->precioC;
+					}
+					else {
+						echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
+						// aca habria que meter algo de que no se puede hacer el viaje
+					}
+					break;
+
+				case "estudiantil":
+					if ( $tarjeta->saldo() >= round( ( $this->precioC / 2 ) , 2 ) )  {
+						$this->monto = round( ( $this->precioC / 2 ) , 2 ) ;
+					}
+					else {
+						echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
+						// aca habria que meter algo de que no se puede hacer el viaje
+					}
+					break;
+				case "total":
+						$this->monto = 0;
+					break;
+                }
+            }
+            elseif ( $anterior->transporte->linea( ) != $this->transporte->linea( ) ) {
                 if ( ( $this->hora > $this->seisam && $this->hora < $this->diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $seisam && $this->hora < $this->dospm && $this->diaSemana == "Sat" ) ) {
                     if ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 60  && $this->cantTrasb != 1 ) {
                         if ( $this->tipo == "comun" ) {
@@ -185,3 +211,4 @@ class Viaje {
 		return $this->monto;
 	}
 }
+
