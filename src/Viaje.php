@@ -32,7 +32,7 @@ class Viaje {
 		$viajes = $tarjeta->viajesRealizados();
 		$anterior = end( $viajes );
 
-		if ( is_a ( $this->transporte , 'Colectivo' ) ) {
+		if ( is_a ( $this->transporte , 'TpFinal\Colectivo' ) ) {
             if ( $anterior->transporte->linea( ) != $this->transporte->linea( )) {
                 if ( ( $this->hora > $seisam && $this->hora < $diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $seisam && $this->hora < $dospm && $this->diaSemana == "Sat" ) ) {
                     if ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 60  && $this->cantTrasb != 1 ) {
@@ -104,7 +104,7 @@ class Viaje {
 		}
 		}
 
-		if ( is_a ( $this->transporte , 'Bici' ) ) {
+		if ( is_a ( $this->transporte , 'TpFinal\Bici' ) ) {
 			$diaSiguiente = strtotime ( '+1 day' , strtotime ( $anterior->fecha ) );
 			$diaSiguiente = date ( 'Y/m/j' , $diaSiguiente );
 			if($this->fecha <= $diaSiguiente && $this->horaActual <= $anterior->horaActual) {
