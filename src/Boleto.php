@@ -19,7 +19,7 @@ class Boleto extends Viaje {
 		echo $this->hora .  "<br>";
 		echo "tarjeta: " . $this->idTarjeta .  "<br>";
 		echo "linea: " . $this->linea  . "<br>";
-		echo "franquicia: " . $this->tipo .  "<br>";.
+		echo "franquicia: " . $this->tipo .  "<br>";
 		echo "monto: " . $this->monto .  "<br>";
 		echo "saldo: " . $this->saldo  . "<br>";
 	}
