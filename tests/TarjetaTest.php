@@ -66,6 +66,16 @@ class TarjetaTest extends TestCase {
 		$tarjeta->pagar($colectivo103);
 	    	$this->assertEquals( $tarjeta->saldo(), 37.1 );
     }
+	
+	public function testViajeTransbordoJubilado() {
+		$tarjeta = new Tarjeta ( 1234, "total");
+		$colectivo144 = new Colectivo ( 144 );
+		$tarjeta->cargarSaldo( 50 );
+	    	$tarjeta->pagar($colectivo144);
+		$colectivo103 = new Colectivo ( 103 );
+		$tarjeta->pagar($colectivo103);
+	    	$this->assertEquals( $tarjeta->saldo(), 50 );
+    }
 	public function testViajeTransbordoEstudiantil() {
 		$tarjeta = new Tarjeta ( 1234, "estudiantil");
 		$colectivo144 = new Colectivo ( 144 );
