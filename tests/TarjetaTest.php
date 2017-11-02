@@ -66,6 +66,15 @@ class TarjetaTest extends TestCase {
 		$tarjeta->pagar($colectivo103);
 	    	$this->assertEquals( $tarjeta->saldo(), 37.1 );
     }
+	public function testViajeTransbordoEstudiantil() {
+		$tarjeta = new Tarjeta ( 1234, "estudiantil");
+		$colectivo144 = new Colectivo ( 144 );
+		$tarjeta->cargarSaldo( 50 );
+	    	$tarjeta->pagar($colectivo144);
+		$colectivo103 = new Colectivo ( 103 );
+		$tarjeta->pagar($colectivo103);
+	    	$this->assertEquals( $tarjeta->saldo(), 43.55 );
+    }
 	public function testDosViajesTransbordo() {
 		$tarjeta = new Tarjeta ( 1234, "comun");
 		$colectivo103 = new Colectivo ( 103 );
@@ -76,7 +85,16 @@ class TarjetaTest extends TestCase {
 		$tarjeta->pagar($colectivo103);
 		$this->assertEquals( $tarjeta->saldo(), 27.4 );
     }
-	
+	public function testDosViajesTransbordo() {
+		$tarjeta = new Tarjeta ( 1234, "estudiantil");
+		$colectivo103 = new Colectivo ( 103 );
+		$colectivo144 = new Colectivo ( 144 );
+		$tarjeta->cargarSaldo( 50 );
+		$tarjeta->pagar($colectivo144);
+		$tarjeta->pagar($colectivo103);
+		$tarjeta->pagar($colectivo103);
+		$this->assertEquals( $tarjeta->saldo(), 38.7 );
+    }
 	public function testAlquilarBici() {
 		$tarjeta = new Tarjeta ( 1234, "comun");
 		$tarjeta->cargarSaldo( 50 );
