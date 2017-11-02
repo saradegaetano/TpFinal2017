@@ -62,7 +62,7 @@ class Viaje {
                 }
             }
             elseif ( $anterior->transporte->linea( ) != $this->transporte->linea( ) ) {
-                if ( ( $this->hora > $this->seisam && $this->hora < $this->diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $seisam && $this->hora < $this->dospm && $this->diaSemana == "Sat" ) ) {
+                if ( ( $this->hora > $this->seisam && $this->hora < $this->diezpm && ( $this->diaSemana == "Mon" || $this->diaSemana == "Tue" || $this->diaSemana == "Wed" || $this->diaSemana == "Thu" || $this->diaSemana == "Fri") ) || ( $this->hora > $this->seisam && $this->hora < $this->dospm && $this->diaSemana == "Sat" ) ) {
                     if ( ( ( $this->horaActual - $anterior->horaActual ) / 60 ) < 60  && $this->cantTrasb != 1 ) {
                         if ( $this->tipo == "comun" ) {
                             if ( $tarjeta->saldo() >= round( ( $this->precioC / 3 ) , 1 ) ) {
