@@ -113,8 +113,10 @@ class Viaje {
 
 		if ( is_a ( $this->transporte , 'TpFinal\Bici' ) ) {
 			if($viajes != NULL) {
-				for ( $i=0; (!is_a( ($anterior->transporte()), 'TpFinal\Bici' )) && ($i <= count($viajes));  $i++) {
+				$transpAnterior = $anterior->transporte();
+				for ( $i=0; (!is_a( $transpAnterior, 'TpFinal\Bici' )) && ($i <= count($viajes));  $i++) {
 					$anterior = prev($anterior);
+					$transpAnterior = $anterior->transporte();
 				}
 				if ( is_a ( $anterior->transporte, 'TpFinal\Bici' ) ) {
 					$diaSiguiente = strtotime ( '+1 day' , strtotime ( $anterior->fecha ) );
