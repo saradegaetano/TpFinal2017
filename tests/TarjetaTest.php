@@ -68,7 +68,7 @@ class TarjetaTest extends TestCase {
 		$tarjeta->cargarSaldo( 50 );
 		$bici = new Bici (1234);
 		$tarjeta->pagar($bici);
-		$this->assertEquals( $tarjeta3->saldo(), 37.55 );
+		$this->assertEquals( $tarjeta->saldo(), 37.55 );
 	}
 	
 	public function testAlquilarBicis() {
@@ -78,7 +78,7 @@ class TarjetaTest extends TestCase {
 		$tarjeta->pagar($bici);
 		$bici2 = new Bici (2534);
 		$tarjeta->pagar($bici2);
-		$this->assertEquals( $tarjeta3->saldo(), 37.55 );
+		$this->assertEquals( $tarjeta->saldo(), 37.55 );
 	}
 	
 }
