@@ -13,7 +13,7 @@ class Boleto extends Viaje {
 		$this->saldo = $viaje->tarjeta->saldo();
 		$this->idTarjeta = $viaje->tarjeta->id();
 		$this->monto = $viaje->monto();
-		if ( is_a ( $this->transporte , 'TpFinal\Colectivo' ) ) {
+		if ( is_a ( $viaje->transporte , 'TpFinal\Colectivo' ) ) {
 			$this->linea = $viaje->transporte->linea();
 		}
 		else {
