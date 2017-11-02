@@ -113,7 +113,7 @@ class Viaje {
 
 		if ( is_a ( $this->transporte , 'TpFinal\Bici' ) ) {
 			if($viajes != NULL) {
-				for ( $i=0; (!is_a( $anterior->transporte, 'TpFinal\Bici' )) && ($i <= count($viajes));  $i++) {
+				for ( $i=0; (!is_a( $anterior->transporte(), 'TpFinal\Bici' )) && ($i <= count($viajes));  $i++) {
 					$anterior = prev($anterior);
 				}
 				if ( is_a ( $anterior->transporte, 'TpFinal\Bici' ) ) {
@@ -225,6 +225,9 @@ class Viaje {
 
 	public function monto() {
 		return $this->monto;
+	}
+	public function transporte() {
+		return $this->transporte;
 	}
 }
 
