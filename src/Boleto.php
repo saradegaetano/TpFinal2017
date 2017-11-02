@@ -16,8 +16,10 @@ class Boleto extends Viaje {
 		if ( is_a ( $this->transporte , 'TpFinal\Colectivo' ) ) {
 			$this->linea = $viaje->transporte->linea();
 		}
-		else $this->linea = $viaje->transporte->id();
-		
+		else {
+			$this->linea = $viaje->transporte->id();
+		}
+			
 		echo $this->fecha .  "<br>";
 		echo $this->hora .  "<br>";
 		echo "tarjeta: " . $this->idTarjeta .  "<br>";
