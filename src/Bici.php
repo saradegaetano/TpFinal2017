@@ -8,6 +8,9 @@ class Bici extends Transporte {
 	function __construct ( $id ) {
 		$this->id = $id;
 	}
+	public function id () {
+		return $this->id;
+	}
 }
 
 ?>
