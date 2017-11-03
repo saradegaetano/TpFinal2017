@@ -128,7 +128,7 @@ class Viaje {
 					}
 				}
 			}
-			elseif ( $viajes == NULL || $this->alquilarBici == 1; ) {
+			elseif ( $viajes == NULL || $this->alquilarBici == 1 ) {
 				switch ( $this->tipo ) {
 				case "comun":
 					if ( $tarjeta->saldo() >= $this->precioB ) {
