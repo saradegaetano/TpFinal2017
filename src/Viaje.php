@@ -1,6 +1,6 @@
 <?php
-
 namespace TpFinal;
+
 class Viaje {
 	protected $fecha;
 	protected $hora;
@@ -15,7 +15,6 @@ class Viaje {
 	protected $diezpm;
 	protected $cantTrasb = 0;
 	protected $tarjeta;
-
 	function __construct ( Tarjeta $tarjeta, Transporte $transporte ) {
 		$this->seisam = date ( "06:00:00am" );
 		$this->dospm = date ( "02:00:00pm" );
@@ -28,12 +27,10 @@ class Viaje {
 		$this->transporte = $transporte;
 		$this->tipo = $tarjeta->franquicia();
 		$this->tarjeta = $tarjeta;
-
 		$viajes = $tarjeta->viajesRealizados();
 		if ( $viajes != NULL ){
 			$anterior = end( $viajes );
 		}
-
 		if ( is_a ( $this->transporte , 'TpFinal\Colectivo' ) ) {
            		if ( $viajes == NULL ) {
                 		switch ( $this->tipo ) {
@@ -46,7 +43,6 @@ class Viaje {
 						// aca habria que meter algo de que no se puede hacer el viaje
 					}
 					break;
-
 				case "estudiantil":
 					if ( $tarjeta->saldo() >= round( ( $this->precioC / 2 ) , 2 ) )  {
 						$this->monto = round( ( $this->precioC / 2 ) , 2 ) ;
@@ -94,7 +90,6 @@ class Viaje {
 					// aca habria que meter algo de que no se puede hacer el viaje
 				}
 				break;
-
 			case "estudiantil":
 				if ( $tarjeta->saldo() >= round( ( $this->precioC / 2 ) , 2 ) )  {
 					$this->monto = round( ( $this->precioC / 2 ) , 2 ) ;
@@ -110,15 +105,16 @@ class Viaje {
             }
 		}
 		}
-
 		if ( is_a ( $this->transporte , 'TpFinal\Bici' ) ) {
 			if($viajes != NULL) {
 				$transpAnterior = $anterior->transporte();
-				for ( $i=0; (!is_a( $transpAnterior, 'TpFinal\Bici' )) && ($i <= count($viajes));  $i++) {
+				for ( $i=0; (!is_a( $transpAnterior, 'TpFinal\Bici' )) && ($i < count($viajes));  $i++) {
 					$anterior = prev($anterior);
-					$transpAnterior = $anterior->transporte();
+					if ( ($i + 1) < count($viajes) ) {
+						$transpAnterior = $anterior->transporte();
+					}
 				}
-				if ( is_a ( $anterior->transporte, 'TpFinal\Bici' ) ) {
+				if ( is_a ( $transpAnterior, 'TpFinal\Bici' ) ) {
 					$diaSiguiente = strtotime ( '+1 day' , strtotime ( $anterior->fecha ) );
 					$diaSiguiente = date ( 'Y/m/j' , $diaSiguiente );
 					if($this->fecha <= $diaSiguiente && $this->horaActual <= $anterior->horaActual) {
@@ -138,7 +134,6 @@ class Viaje {
 									// aca habria que meter algo de que no se puede hacer el viaje
 								}
 								break;
-
 							case "estudiantil":
 								if ( $tarjeta->saldo() >= round( ( $this->precioB / 2 ) , 2 ) )  {
 									$this->monto = round( ( $this->precioB / 2 ) , 2 ) ;
@@ -171,7 +166,6 @@ class Viaje {
 								// aca habria que meter algo de que no se puede hacer el viaje
 							}
 							break;
-
 						case "estudiantil":
 							if ( $tarjeta->saldo() >= round( ( $this->precioB / 2 ) , 2 ) )  {
 								$this->monto = round( ( $this->precioB / 2 ) , 2 ) ;
@@ -204,7 +198,6 @@ class Viaje {
 						// aca habria que meter algo de que no se puede hacer el viaje
 					}
 					break;
-
 				case "estudiantil":
 					if ( $tarjeta->saldo() >= round( ( $this->precioB / 2 ) , 2 ) )  {
 						$this->monto = round( ( $this->precioB / 2 ) , 2 ) ;
@@ -224,7 +217,6 @@ class Viaje {
 			}
 		}
 	}
-
 	public function monto() {
 		return $this->monto;
 	}
@@ -232,4 +224,3 @@ class Viaje {
 		return $this->transporte;
 	}
 }
-
