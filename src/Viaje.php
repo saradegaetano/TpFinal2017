@@ -158,9 +158,6 @@ class Viaje {
 							if ( $tarjeta->saldo() >= $this->precioB ) {
 								$this->monto = $this->precioB;
 							}
-							elseif ($tarjeta->viajeplus <= 1) {
-								$tarjeta->viajeplus += 1;
-							}
 							else {
 								echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
 								// aca habria que meter algo de que no se puede hacer el viaje
@@ -169,9 +166,6 @@ class Viaje {
 						case "estudiantil":
 							if ( $tarjeta->saldo() >= round( ( $this->precioB / 2 ) , 2 ) )  {
 								$this->monto = round( ( $this->precioB / 2 ) , 2 ) ;
-							}
-							elseif ($tarjeta->viajeplus <= 1) {
-								$tarjeta->viajeplus += 1;
 							}
 							else {
 								echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
@@ -190,9 +184,6 @@ class Viaje {
 					if ( $tarjeta->saldo() >= $this->precioB ) {
 						$this->monto = $this->precioB;
 					}
-					elseif ($tarjeta->viajeplus <= 1) {
-						$tarjeta->viajeplus += 1;
-					}
 					else {
 						echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
 						// aca habria que meter algo de que no se puede hacer el viaje
@@ -201,9 +192,6 @@ class Viaje {
 				case "estudiantil":
 					if ( $tarjeta->saldo() >= round( ( $this->precioB / 2 ) , 2 ) )  {
 						$this->monto = round( ( $this->precioB / 2 ) , 2 ) ;
-					}
-					elseif ($tarjeta->viajeplus <= 1) {
-						$tarjeta->viajeplus += 1;
 					}
 					else {
 						echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
