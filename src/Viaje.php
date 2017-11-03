@@ -15,6 +15,8 @@ class Viaje {
 	protected $diezpm;
 	protected $cantTrasb = 0;
 	protected $tarjeta;
+	protected $alquilarBici;
+	
 	function __construct ( Tarjeta $tarjeta, Transporte $transporte ) {
 		$this->seisam = date ( "06:00:00am" );
 		$this->dospm = date ( "02:00:00pm" );
@@ -119,61 +121,14 @@ class Viaje {
 					$diaSiguiente = date ( 'Y/m/j' , $diaSiguiente );
 					if($this->fecha <= $diaSiguiente && $this->horaActual <= $anterior->horaActual) {
 						$this->monto = 0;
+						$this->alquilarBici = 0;
 					}
 					else {
-						switch ( $this->tipo ) {
-							case "comun":
-								if ( $tarjeta->saldo() >= $this->precioB ) {
-									$this->monto = $this->precioB;
-								}
-
-								else {
-									echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
-									// aca habria que meter algo de que no se puede hacer el viaje
-								}
-								break;
-							case "estudiantil":
-								if ( $tarjeta->saldo() >= round( ( $this->precioB / 2 ) , 2 ) )  {
-									$this->monto = round( ( $this->precioB / 2 ) , 2 ) ;
-								}
-								else {
-									echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
-									// aca habria que meter algo de que no se puede hacer el viaje
-								}
-								break;
-							case "total":
-									$this->monto = 0;
-								break;
-						}
-					}
-				}
-				else {
-					switch ( $this->tipo ) {
-						case "comun":
-							if ( $tarjeta->saldo() >= $this->precioB ) {
-								$this->monto = $this->precioB;
-							}
-							else {
-								echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
-								// aca habria que meter algo de que no se puede hacer el viaje
-							}
-							break;
-						case "estudiantil":
-							if ( $tarjeta->saldo() >= round( ( $this->precioB / 2 ) , 2 ) )  {
-								$this->monto = round( ( $this->precioB / 2 ) , 2 ) ;
-							}
-							else {
-								echo "No tiene saldo suficiente y ya utilizo los dos viajes plus<br>";
-								// aca habria que meter algo de que no se puede hacer el viaje
-							}
-							break;
-						case "total":
-								$this->monto = 0;
-							break;
+						$this->alquilarBici = 1;
 					}
 				}
 			}
-			else{
+			elseif ( $viajes == NULL || $this->alquilarBici == 1; ) {
 				switch ( $this->tipo ) {
 				case "comun":
 					if ( $tarjeta->saldo() >= $this->precioB ) {
